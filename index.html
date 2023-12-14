@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel=icon href="https://i.postimg.cc/RFd9JsR5/safdjg-2020-resized-2.png">
+    <title>Absence Finder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body class="container mt-4">
+
+    <div class="text-center" id="title">
+        <h2 class="mb-4">Absence Finder</h2>
+    </div>
+
+    <div class="input mt-4" id="formContainer">
+        <label for="input1">Name</label>
+        <div class="d-flex form-group col-md-14">
+            <input type="text" class="form-control" id="input1" placeholder="Firstname Lastname">
+            <button class="btn btn-success ml-2 md-4" type="button" onclick="addForm(2)">
+            <span class="plus">Add</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary" onclick="submit()">Find</button>
+    </div>
+
+    <div class="text-center mt-2">
+        <p>by Daniel Foster</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="script.js"></script>
+</body>
+</html>
