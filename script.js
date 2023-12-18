@@ -2,7 +2,10 @@ let formCount = 1;
 
 function addForm(index) {
     if (formCount >= 5) {
-        alert('Maximum number of forms is 5');
+        Swal.fire({
+            icon: 'warning',
+            title: 'Maximum number of forms reached',
+        });
         return;
     }
 
@@ -19,7 +22,7 @@ function addForm(index) {
     newInput.type = 'text';
     newInput.className = 'form-control';
     newInput.id = 'input' + formCount;
-    newInput.placeholder = 'Firstname Lastname' + ' (' + formCount + ')';
+    newInput.placeholder = 'Part of name' + ' (' + formCount + ')';
 
     const newInputGroup = document.createElement('div');
     newInputGroup.className = 'input-group';
@@ -75,6 +78,23 @@ function submit() {
             document.getElementById(inputId).value = '';
         }
     } else {
-        alert('Please enter at least one name!');
+        Swal.fire({
+            icon: 'error',
+            title: 'Enter at least one name',
+        });
+        return;
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const formContainer = document.getElementById('formContainer');
+    
+    // Add event listener to the form container
+    formContainer.addEventListener('keydown', function(event) {
+        // Check if the pressed key is "Enter"
+        if (event.key === 'Enter') {
+            // Call addForm function when Enter key is pressed
+            addForm(formCount + 1);
+        }
+    });
+});
