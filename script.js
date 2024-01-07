@@ -22,17 +22,21 @@ function addForm(index) {
     newInput.type = 'text';
     newInput.className = 'form-control';
     newInput.id = 'input' + formCount;
-    newInput.placeholder = 'Part of name' + ' (' + formCount + ')';
+
+    // Set placeholder based on selected category
+    const categorySelect = document.getElementById('category');
+    const selectedCategory = categorySelect.value;
+    newInput.placeholder = getPlaceholder(selectedCategory, formCount);
 
     const newInputGroup = document.createElement('div');
     newInputGroup.className = 'input-group';
 
     const newButton = document.createElement('button');
-    
+
     if (formCount < 5) {
         newButton.className = 'btn btn-success ml-2';
         newButton.type = 'button';
-        newButton.onclick = function() {
+        newButton.onclick = function () {
             addForm(formCount + 1);
         };
 
@@ -53,6 +57,24 @@ function addForm(index) {
     newFormGroup.appendChild(newInputGroup);
     newForm.appendChild(newFormGroup);
     formContainer.appendChild(newForm);
+}
+
+function getPlaceholder(selectedCategory, formCount) {
+    if (selectedCategory === 'topic') {
+        return 'Part of name' + ' (' + formCount + ')';
+    } else if (selectedCategory === 'message') {
+        return 'District' + ' (' + formCount + ')';
+    } else {
+        return '';
+    }
+}
+
+function updatePlaceholder() {
+    const categorySelect = document.getElementById('category');
+    const inputElement = document.getElementById('input1');
+    const selectedCategory = categorySelect.value;
+
+    inputElement.placeholder = getPlaceholder(selectedCategory, 1);
 }
 
 function submit() {
@@ -105,15 +127,22 @@ function submit() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const formContainer = document.getElementById('formContainer');
-    
+
     // Add event listener to the form container
-    formContainer.addEventListener('keydown', function(event) {
+    formContainer.addEventListener('keydown', function (event) {
         // Check if the pressed key is "Enter"
         if (event.key === 'Enter') {
             // Call addForm function when Enter key is pressed
             addForm(formCount + 1);
         }
     });
+
+    // Add event listener to the category select
+    const categorySelect = document.getElementById('category');
+    categorySelect.addEventListener('change', updatePlaceholder);
+
+    // Call updatePlaceholder initially to set the correct placeholder
+    updatePlaceholder();
 });
