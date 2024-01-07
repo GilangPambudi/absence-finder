@@ -60,6 +60,15 @@ function submit() {
     const categorySelect = document.getElementById('category');
     const selectedCategory = categorySelect.value;
 
+    // Check if a category is selected
+    if (selectedCategory === 'Select Category') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Please select category',
+        });
+        return;
+    }
+
     for (let i = 1; i <= formCount; i++) {
         const inputId = 'input' + i;
         const inputElement = document.getElementById(inputId);
@@ -85,7 +94,7 @@ function submit() {
         for (let i = 1; i <= formCount; i++) {
             const inputId = 'input' + i;
             document.getElementById(inputId).value = '';
-            document.getElementById(selectedCategory).selectedIndex = 0;
+            document.getElementById('category').selectedIndex = 0; // Reset category to default value
         }
     } else {
         Swal.fire({
