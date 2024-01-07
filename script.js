@@ -57,13 +57,22 @@ function addForm(index) {
 
 function submit() {
     const urls = [];
+    const categorySelect = document.getElementById('category');
+    const selectedCategory = categorySelect.value;
+
     for (let i = 1; i <= formCount; i++) {
         const inputId = 'input' + i;
         const inputElement = document.getElementById(inputId);
         const inputValue = inputElement.value.trim();
 
         if (inputValue !== '') {
-            const url = `https://fire.san-andreas.net/search.php?keywords=${inputValue}&terms=all&author=&fid%5B%5D=1061&sc=1&sf=titleonly&sr=posts&sk=t&sd=d&st=0&ch=300&t=0&submit=Search`;
+            let url;
+            if (selectedCategory === 'topic') {
+                url = `https://fire.san-andreas.net/search.php?keywords=${inputValue}&terms=all&author=&fid%5B%5D=1061&sc=1&sf=titleonly&sr=posts&sk=t&sd=d&st=0&ch=300&t=0&submit=Search`;
+            } else if (selectedCategory === 'message') {
+                url = `https://fire.san-andreas.net/search.php?keywords=${inputValue}&terms=all&author=&fid%5B%5D=1061&sc=1&sf=msgonly&sr=posts&sk=t&sd=d&st=0&ch=300&t=0&submit=Search`;
+            }
+
             urls.push(url);
         }
     }
@@ -76,6 +85,7 @@ function submit() {
         for (let i = 1; i <= formCount; i++) {
             const inputId = 'input' + i;
             document.getElementById(inputId).value = '';
+            document.getElementById(selectedCategory).selectedIndex = 0;
         }
     } else {
         Swal.fire({
